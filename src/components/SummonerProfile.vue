@@ -94,6 +94,7 @@ export default {
         }
     },
     methods: {
+        /* eslint-disable */ 
         getNASummonerData() {
             this.$emit('loading', true)
             //load AWS credentials
@@ -180,6 +181,7 @@ export default {
         noImg(event) {
             event.target.style.display='none'
         }
+        /* eslint-enable */
     },
 }
 </script>

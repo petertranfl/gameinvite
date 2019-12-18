@@ -49,8 +49,6 @@ export default {
     },
     methods: {
         getChampionMasteryByID() {
-            console.log(this.champions)
-
         //load AWS credentials
         AWS.config.credentials = new AWS.CognitoIdentityCredentials({
                 IdentityPoolId: 'us-east-1:98b70204-c8a3-4336-b9be-ea2f4393f3b1',

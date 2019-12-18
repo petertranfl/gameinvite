@@ -48,7 +48,7 @@
 
 <script>
 import AWS from "aws-sdk";
-import { green, red } from 'color-name';
+// import { green, red } from 'color-name';
 
 export default {
   name: "MatchHistory",
@@ -73,6 +73,7 @@ export default {
     }
   },
   methods: {
+    /* eslint-disable */ 
     getMatchHistory(beginIndex, endIndex) {
       this.matchHistoryDataLoaded = false;
       AWS.config.credentials = new AWS.CognitoIdentityCredentials(
@@ -105,7 +106,6 @@ export default {
             promises.push(promise);
             }
           Promise.all(promises).then(value => {
-            console.log(this.matchHistoryData)
             this.matchHistoryDataLoaded = true;
             this.$emit('error', false);
             this.$emit('loading', false);
@@ -310,9 +310,10 @@ export default {
       event.target.src = "questionMark.png"
     },
     noItem(event) {
-      event.target.src = "/item/no_item.png";
+      event.target.src = '/item/no_item.png';
       event.target.className += " noItem";
     }
+    /* eslint-enable */
   }
 };
 </script>
