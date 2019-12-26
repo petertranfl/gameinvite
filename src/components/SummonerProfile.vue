@@ -20,6 +20,7 @@ import AWS from 'aws-sdk';
 
 export default {
     name: 'SummonerProfile',
+    props: ['summonerName'],
     data() {
         return {
             summonerLevel: Number,
@@ -43,9 +44,7 @@ export default {
         }
     },
     computed: {
-        summonerName() {
-            return this.$store.state.summonerName
-        },
+        /* eslint-disable */ 
         leagueNumber() {
             switch (this.soloSummonerLeague) {
                 case "iron":
@@ -67,6 +66,7 @@ export default {
                 case "challenger":
                     return "09";
             }
+        /* eslint-enable */
         },
         banner() {
             switch(this.soloSummonerLeague) {

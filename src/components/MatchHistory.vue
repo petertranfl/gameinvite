@@ -30,12 +30,12 @@
           <p class="ratio">{{KDA(index)}} KDA</p>
         </div>
         <div class="itemsBox">
-          <img :src="'/item/' + getSummonerMatchStats(index).stats.item0 + '.png'" class="item" @error="noItem" />
-          <img :src="'/item/' + getSummonerMatchStats(index).stats.item1 + '.png'" class="item" @error="noItem" />
-          <img :src="'/item/' + getSummonerMatchStats(index).stats.item2 + '.png'" class="item" @error="noItem" />
-          <img :src="'/item/' + getSummonerMatchStats(index).stats.item3 + '.png'" class="item" @error="noItem" />
-          <img :src="'/item/' + getSummonerMatchStats(index).stats.item4 + '.png'" class="item" @error="noItem" />
-          <img :src="'/item/' + getSummonerMatchStats(index).stats.item5 + '.png'" class="item" @error="noItem" />
+          <img :src="'./img/' + getSummonerMatchStats(index).stats.item0 + '.png'" class="item" @error="noItem" />
+          <img :src="'./img/' + getSummonerMatchStats(index).stats.item1 + '.png'" class="item" @error="noItem" />
+          <img :src="'./img/' + getSummonerMatchStats(index).stats.item2 + '.png'" class="item" @error="noItem" />
+          <img :src="'./img/' + getSummonerMatchStats(index).stats.item3 + '.png'" class="item" @error="noItem" />
+          <img :src="'./img/' + getSummonerMatchStats(index).stats.item4 + '.png'" class="item" @error="noItem" />
+          <img :src="'./img/' + getSummonerMatchStats(index).stats.item5 + '.png'" class="item" @error="noItem" />
         </div>
       </div>
       <!-- <div class="loadMore">
@@ -54,6 +54,7 @@ export default {
   name: "MatchHistory",
   data() {
     return {
+      // publicPath: process.env.BASE_URL,
       matchHistoryDataLoaded: false,
       matchHistoryData: Object,
       // item: LeagueItems
@@ -75,6 +76,7 @@ export default {
   methods: {
     /* eslint-disable */ 
     getMatchHistory(beginIndex, endIndex) {
+      // console.log(publicPath)
       this.matchHistoryDataLoaded = false;
       AWS.config.credentials = new AWS.CognitoIdentityCredentials(
         {
@@ -100,6 +102,7 @@ export default {
       getMatchData
         .then(data => {
           this.matchHistoryData = JSON.parse(data.Payload);
+          console.log(this.matchHistoryData)
           let promises = [];
           for (let i = 0; i < this.matchHistoryData.matches.length; i++) {
             let promise = this.getMatchDetails(i, this.matchHistoryData.matches[i].gameId);
@@ -205,6 +208,10 @@ export default {
           return "summonerignite";
         case 21:
           return "summonerbarrier";
+        case 30: 
+          return "benevolence_of_king_poro_icon"
+        case 31: 
+          return "trailblazer_poro_icon"
         case 32:
           return "summoner_mark";
       }
@@ -231,6 +238,10 @@ export default {
           return "summonerignite";
         case 21:
           return "summonerbarrier";
+        case 30: 
+          return "benevolence_of_king_poro_icon"
+        case 31: 
+          return "trailblazer_poro_icon"
         case 32:
           return "summoner_mark";
       }
@@ -310,7 +321,7 @@ export default {
       event.target.src = "questionMark.png"
     },
     noItem(event) {
-      event.target.src = '/item/no_item.png';
+      event.target.src = './img/no_item.png';
       event.target.className += " noItem";
     }
     /* eslint-enable */

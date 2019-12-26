@@ -1,10 +1,13 @@
 <template>
     <div class="landingPage">
         <div class="landingText">
-            <h1> Welcome to the SummonerSpy! <br> <br> Look up a Summoner by searching for their Summoner Name below. </h1>
+            <h1> Welcome to the SummonerSpy</h1>
         </div>
         <div class="searchBar">
             <input v-model="summonerName" type="text" v-on:keyup.enter="submitSearch">
+            <a @click="submitSearch">
+            <font-awesome-icon :icon="['fa', 'search']" size="lg" :style="{color: '#fad161', cursor: 'pointer'}" transform="up-2 right-4"></font-awesome-icon>
+            </a>
         </div>
     </div>
 </template>
@@ -18,8 +21,12 @@ export default {
     },
     methods: {
         submitSearch() {
-            this.$store.commit('saveSummonerName', this.summonerName)
-            this.$router.push('/profile/')
+            this.$router.push({
+                name: "Profile",
+                params: {
+                    summonerName: this.summonerName
+                }
+            })
         },
     }
 }
@@ -40,11 +47,11 @@ export default {
         justify-content: center;
         width: 100vw;
         margin-top: 3rem;
-        color: #fad161;
+        color: #ffc21b;
         text-shadow: 1px 0 0 rgb(77, 65, 1), 0 -1px 0 rgb(77, 65, 1), 0 1px 0 rgb(77, 65, 1), -1px 0 0 rgb(77, 65, 1);
     }
     .searchBar {
-        margin-top: 10rem;
+        margin-top: 15rem;
     }
     .searchBar input {
         height: 1.5rem;
@@ -52,7 +59,7 @@ export default {
         font-size: 1.3rem;
         border-style: none;
         border-radius: 0.5rem;
-        color: #fad161;
+        color: black;
         /*border-color:rgb(77, 65, 1);*/
         background: rgba(255, 255, 255, 0.205);
     }

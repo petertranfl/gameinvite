@@ -13,9 +13,10 @@ export default new Router({
             component: LandingPage
         },
         {
-            path: "/profile/",
+            path: "/profile/:summonerName",
             name: "Profile",
-            component: Profile
+            component: Profile,
+            props: true,
         }
     ]
 })
