@@ -8,9 +8,6 @@
       <ChampionMastery></ChampionMastery>
       <MatchHistory @loading="finishLoading" @error="loadError"></MatchHistory>
     </div>
-    <div v-if="error">
-      <ErrorPage></ErrorPage>
-    </div>
   </div>
 </template>
 
@@ -18,8 +15,6 @@
 import SummonerProfile from '../components/SummonerProfile'
 import ChampionMastery from '../components/ChampionMastery'
 import MatchHistory from '../components/MatchHistory'
-import ErrorPage from '../components/ErrorPage'
-
 
 export default {
   name: 'Profile',
@@ -27,13 +22,11 @@ export default {
     SummonerProfile,
     ChampionMastery,
     MatchHistory,
-    ErrorPage
   },
   data() {
     return {
       summonerName: String,
       isLoading: true,
-      error: false
     }
   },
   methods: {
@@ -44,7 +37,10 @@ export default {
       this.isLoading = isLoading
     },
     loadError(isError) {
-      this.error = isError
+     if (isError)
+      this.$router.push({
+        name: "ErrorPage"
+      })
     }
   },
   created() {

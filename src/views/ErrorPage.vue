@@ -18,14 +18,26 @@ export default {
   name: 'ErrorPage',
   data() {
     return {
-
+      summonerName: ""
     }
+  },
+  methods: {
+    /* eslint-disable */ 
+    submitSearch() {
+      this.$router.push({
+          name: "Profile",
+          params: {
+            summonerName: this.summonerName
+          }
+      })
+    },
+    /* eslint-enable */
   }
 }
 </script>
 
 
-<style>
+<style scoped>
 .errorContainer {
   height: 100vh
 }
