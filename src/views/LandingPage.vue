@@ -60,7 +60,6 @@ export default {
         border-style: none;
         border-radius: 0.5rem;
         color: black;
-        /*border-color:rgb(77, 65, 1);*/
         background: rgba(255, 255, 255, 0.205);
     }
 </style>

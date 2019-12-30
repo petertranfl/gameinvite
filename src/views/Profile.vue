@@ -9,7 +9,7 @@
       <MatchHistory @loading="finishLoading" @error="loadError"></MatchHistory>
     </div>
     <div v-if="error">
-      <h2> big error </h2>
+      <ErrorPage></ErrorPage>
     </div>
   </div>
 </template>
@@ -18,6 +18,7 @@
 import SummonerProfile from '../components/SummonerProfile'
 import ChampionMastery from '../components/ChampionMastery'
 import MatchHistory from '../components/MatchHistory'
+import ErrorPage from '../components/ErrorPage'
 
 
 export default {
@@ -25,7 +26,8 @@ export default {
   components: {
     SummonerProfile,
     ChampionMastery,
-    MatchHistory
+    MatchHistory,
+    ErrorPage
   },
   data() {
     return {
@@ -42,8 +44,8 @@ export default {
       this.isLoading = isLoading
     },
     loadError(isError) {
-      this.error = isError;
-    },
+      this.error = isError
+    }
   },
   created() {
     this.summonerName = this.$route.params.summonerName

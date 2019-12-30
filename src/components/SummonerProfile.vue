@@ -1,6 +1,12 @@
 <template>
     <div class="main-container">
         <div v-if="summonerDataLoaded">
+            <div class="searchBar">
+                <input v-model="searchParam" type="text" v-on:keyup.enter="submitSearch">
+                <a @click="submitSearch">
+                <font-awesome-icon :icon="['fa', 'search']" size="lg" :style="{color: '#fad161', cursor: 'pointer'}" transform="up-2 right-4"></font-awesome-icon>
+                </a>
+            </div>
             <div class="profile-container">
                 <img id="rankedCrest" :src="'http://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/rankedcrests/' + leagueNumber + '_' + soloSummonerLeague + '/images/' + soloSummonerLeague + '_base_sheeng.png'" alt="" @error="noImg"/>
                 <img id="profileIcon" :src="'http://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/' + profileIconID + '.jpg'"/>
@@ -23,6 +29,7 @@ export default {
     props: ['summonerName'],
     data() {
         return {
+            searchParam: "",
             summonerLevel: Number,
             profileIconID: Number,
             encryptedSummonerID: String,
@@ -180,7 +187,15 @@ export default {
         },
         noImg(event) {
             event.target.style.display='none'
-        }
+        },
+        submitSearch() {
+            this.$router.push({
+                name: "Profile",
+                params: {
+                    summonerName: this.searchParam
+                }
+            })
+        },
         /* eslint-enable */
     },
 }
@@ -194,7 +209,19 @@ export default {
         align-items: center;
         margin-bottom: 2em;
     }
+    .searchBar {
+        align-self: flex-start
+    }
+    .searchBar input {
+        height: 1.5rem;
+        width: 20rem;
+        font-size: 1.3rem;
+        border-style: none;
+        border-radius: 0.5rem;
+        color: black;
 
+        background: rgba(255, 255, 255, 0.205);
+    }
     .profile-container {
         position: relative;
         width: 500px;

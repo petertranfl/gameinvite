@@ -2,7 +2,7 @@
   <div v-if="matchHistoryDataLoaded">
     <div class="matchHistoryContainer">
       <h1>Match History</h1>
-      <div class="matchHistoryCard" v-for="(matches, index) in matchHistoryData.matches" :key="index">
+      <div class="matchHistoryCard" v-for="(match, index) in matchHistoryData.matches" :key="index">
         <div class="timeStamp">{{TimeStamp(index)}}</div>
         <div class="winLoss">{{win(index)}}</div>
         <img
@@ -262,6 +262,8 @@ export default {
           return "/rcp-be-lol-game-data/global/default/v1/perk-images/styles/domination/predator/predator.png";
         case 8128:
           return "/rcp-be-lol-game-data/global/default/v1/perk-images/styles/domination/darkharvest/darkharvest.png";
+        case 8229: 
+          return "/rcp-be-lol-game-data/global/default/v1/perk-images/styles/sorcery/arcanecomet/arcanecomet.png";
         case 9923:
           return "/rcp-be-lol-game-data/global/default/v1/perk-images/styles/domination/hailofblades/hailofblades.png";
         case 8214:
