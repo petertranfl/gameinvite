@@ -17,7 +17,7 @@ export default new Router({
             path: "/profile/:summonerName",
             name: "Profile",
             component: Profile,
-            props: true,
+            props: true
         },
         {
             path: "/error/",

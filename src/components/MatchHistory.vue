@@ -54,7 +54,6 @@ export default {
   name: "MatchHistory",
   data() {
     return {
-      // publicPath: process.env.BASE_URL,
       matchHistoryDataLoaded: false,
       matchHistoryData: Object,
       // item: LeagueItems
@@ -76,7 +75,6 @@ export default {
   methods: {
     /* eslint-disable */ 
     getMatchHistory(beginIndex, endIndex) {
-      // console.log(publicPath)
       this.matchHistoryDataLoaded = false;
       AWS.config.credentials = new AWS.CognitoIdentityCredentials(
         {
@@ -102,7 +100,6 @@ export default {
       getMatchData
         .then(data => {
           this.matchHistoryData = JSON.parse(data.Payload);
-          console.log(this.matchHistoryData)
           let promises = [];
           for (let i = 0; i < this.matchHistoryData.matches.length; i++) {
             let promise = this.getMatchDetails(i, this.matchHistoryData.matches[i].gameId);

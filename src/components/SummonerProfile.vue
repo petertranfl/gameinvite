@@ -1,6 +1,11 @@
 <template>
     <div class="main-container">
         <div v-if="summonerDataLoaded">
+            <div class="homeIcon">
+                <a @click="goHome">
+                    <font-awesome-icon :icon="['fa', 'home']" size="2x" :style="{color: '#fad161', cursor: 'pointer'}" transform="up-2 right-4"></font-awesome-icon>
+                </a>
+            </div>
             <div class="searchBar">
                 <input v-model="searchParam" type="text" v-on:keyup.enter="submitSearch">
                 <a @click="submitSearch">
@@ -132,6 +137,9 @@ export default {
                     this.$emit('loading', false)
                 } else {
                 summonerResults = JSON.parse(data.Payload)
+                //have to clear the store here in case someone enters in the same name from landing page
+                this.$store.dispatch('commitSummonerID', "")
+                this.$store.dispatch('commitAccountID', "")
                 this.summonerLevel = summonerResults.summonerLevel;
                 this.profileIconID = summonerResults.profileIconId;
                 this.encryptedSummonerID = summonerResults.id;
@@ -188,13 +196,13 @@ export default {
         noImg(event) {
             event.target.style.display='none'
         },
-        submitSearch() {
+        goHome() {
             this.$router.push({
-                name: "Profile",
-                params: {
-                    summonerName: this.searchParam
-                }
+                name: 'LandingPage'
             })
+        },
+        submitSearch() {
+            this.$emit('search', this.searchParam)
         },
         /* eslint-enable */
     },
@@ -209,17 +217,23 @@ export default {
         align-items: center;
         margin-bottom: 2em;
     }
+    .homeIcon {
+        position: absolute;
+        padding-top: 1em;
+        left: 17em;
+    }
     .searchBar {
-        align-self: flex-start
+        position: absolute;
+        padding-top: 1em;
+        padding-left: 35em;
     }
     .searchBar input {
         height: 1.5rem;
-        width: 20rem;
+        width: 15rem;
         font-size: 1.3rem;
         border-style: none;
         border-radius: 0.5rem;
         color: black;
-
         background: rgba(255, 255, 255, 0.205);
     }
     .profile-container {

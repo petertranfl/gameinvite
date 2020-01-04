@@ -48,6 +48,7 @@ export default {
         }
     },
     methods: {
+        /* eslint-disable */ 
         getChampionMasteryByID() {
         //load AWS credentials
         AWS.config.credentials = new AWS.CognitoIdentityCredentials({
@@ -56,7 +57,7 @@ export default {
             {
                 region: 'us-east-1'
             });
-
+        /* eslint-enable */
         //create AWS service object
         const lambda = new AWS.Lambda({region: 'us-east-1'});
         //create JSON object for parameters for invoking Lambda function
@@ -71,7 +72,6 @@ export default {
         getMastery.then(data => {
             this.masteryResults = JSON.parse(data.Payload)
             this.masteryDataLoaded = true;
-            //console.log(this.masteryResults)
         })
         getMastery.catch(error => {
             prompt(error)

@@ -3,8 +3,8 @@
     <div class="loadingDiv" v-show="isLoading">
       <div class="loadingIcon"></div> 
     </div>
-    <div v-show="!isLoading && !error">
-      <SummonerProfile @loading="beginLoading" @error="loadError" :summonerName=summonerName></SummonerProfile>
+    <div v-show="!isLoading">
+      <SummonerProfile @loading="beginLoading" @error="loadError" @search="search" :summonerName=summonerName></SummonerProfile>
       <ChampionMastery></ChampionMastery>
       <MatchHistory @loading="finishLoading" @error="loadError"></MatchHistory>
     </div>
@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       summonerName: String,
-      isLoading: true,
+      isLoading: false,
     }
   },
   methods: {
@@ -41,6 +41,10 @@ export default {
       this.$router.push({
         name: "ErrorPage"
       })
+    },
+    search(newSummonerName) {
+      this.summonerName = newSummonerName
+      this.$store.commit('saveSummonerName', this.summonerName)
     }
   },
   created() {
